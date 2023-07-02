@@ -4,6 +4,7 @@ import java.io.IOException;
 import java.sql.Connection;
 import java.sql.PreparedStatement;
 import java.sql.SQLException;
+import java.nio.file.Paths;
 
 import javax.servlet.RequestDispatcher;
 import javax.servlet.ServletException;
@@ -23,15 +24,14 @@ public class AddProductServlet extends HttpServlet {
 		RequestDispatcher dispatcher = null;
 
 		try {
-			String isbn = (String) request.getParameter("isbn");
-			String nome = (String) request.getParameter("nome");
-			String descrizione = (String) request.getParameter("descrizione");
-			String immagine = (String) request.getParameter("immagine");
+			String isbn = request.getParameter("isbn");
+			String nome = request.getParameter("nome");
+			String descrizione = request.getParameter("descrizione");
+			String immagine = request.getParameter("immagine");
 			double prezzo = Double.parseDouble(request.getParameter("prezzo"));
 			int quantita = Integer.parseInt(request.getParameter("quantita"));
-			String genere = (String) request.getParameter("genere");
-			String categoria = (String) request.getParameter("categoria");
-			System.out.println(genere);
+			String genere = request.getParameter("genere");
+			String categoria = request.getParameter("categoria");
 
 			String query = "INSERT INTO prodotti(isbn, nome, descrizione, immagine_prod, prezzo, quantita, genere_nome, categoria_nome) values(?,?,?,?, ?, ?, ?, ?)";
 			connection = DbManager.getConnection();
