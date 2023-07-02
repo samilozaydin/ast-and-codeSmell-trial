@@ -22,17 +22,17 @@ public class AddProductServlet extends HttpServlet {
 		Connection connection = null;
 		RequestDispatcher dispatcher = null;
 
-		String isbn = (String) request.getParameter("isbn");
-		String nome = (String) request.getParameter("nome");
-		String descrizione = (String) request.getParameter("descrizione");
-		String immagine = (String) request.getParameter("immagine");
-		double prezzo = Double.parseDouble(request.getParameter("prezzo"));
-		int quantita = Integer.parseInt(request.getParameter("quantita"));
-		String genere = (String) request.getParameter("genere");
-		String categoria = (String) request.getParameter("categoria");
-		System.out.println(genere);
-
 		try {
+			String isbn = (String) request.getParameter("isbn");
+			String nome = (String) request.getParameter("nome");
+			String descrizione = (String) request.getParameter("descrizione");
+			String immagine = (String) request.getParameter("immagine");
+			double prezzo = Double.parseDouble(request.getParameter("prezzo"));
+			int quantita = Integer.parseInt(request.getParameter("quantita"));
+			String genere = (String) request.getParameter("genere");
+			String categoria = (String) request.getParameter("categoria");
+			System.out.println(genere);
+
 			String query = "INSERT INTO prodotti(isbn, nome, descrizione, immagine_prod, prezzo, quantita, genere_nome, categoria_nome) values(?,?,?,?, ?, ?, ?, ?)";
 			connection = DbManager.getConnection();
 			PreparedStatement ps = connection.prepareStatement(query);
@@ -58,9 +58,7 @@ public class AddProductServlet extends HttpServlet {
 			e.printStackTrace();
 		} finally {
 			try {
-				if (connection == null)
-					return;
-				else
+				if (!connection.equals(null))
 					connection.close();
 			} catch (SQLException e) {
 				e.printStackTrace();
